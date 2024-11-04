@@ -13,4 +13,3 @@ Get real-time weather updates with Skycast, your reliable companion for everythi
 
 Whether heading out for a trip or staying in, Skycast ensures you're always prepared for what’s coming your way!
 
-# Skycast-react
