@@ -63,10 +63,6 @@ input {
   position: relative;
   margin-left: 20px;
   margin-right: 50px;
-  top: 0;
-  left: 0;
-  width: 23vw;
-  height: 100vh;
 }
 .left-top {
   display: flex;
@@ -111,7 +107,6 @@ hr {
 }
 .date {
   background-color: #252525;
-  color: #585858;
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -135,7 +130,6 @@ hr {
 }
 .day {
   background-color: #252525;
-  color: #585858;
   display: flex;
   gap: 40px;
   align-items: center;
@@ -265,12 +259,11 @@ hr {
 
 @media (min-width: 1200px) and (max-width: 1600px) {
   .container {
-    gap: 100px;
+    gap: 50px;
   }
   .middle-container {
     width: 775px;
     height: 940px;
-    margin-bottom: 20px;
   }
   .middle-bottom {
     margin-top: -35px;
@@ -327,7 +320,7 @@ hr {
   }
   .middle-bottom {
     margin-top: -35px;
-    margin-left: 10px;
+    margin-left: -10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -353,7 +346,7 @@ hr {
     display: none;
   }
   .temp {
-    width: 650px;
+    width: 230px;
     height: 250px;
   }
 }
@@ -374,13 +367,18 @@ hr {
     margin-left: 80px;
   }
   .left-bottom {
+    display: flex;
+    gap: 50px;
+    align-items: center;
     width: 500px;
+    height: 500px;
     margin-left: 80px;
   }
   .middle-container {
     width: 650px;
     height: 1245px;
-    margin-left: 20px;
+    margin-top: 20px;
+    margin-left: 60px;
     margin-right: 20px;
     margin-bottom: 20px;
   }
@@ -402,6 +400,9 @@ hr {
   .day {
     display: flex;
     gap: 60px;
+  }
+  .day p {
+    font-size: 35px;
   }
   .search-container {
     margin-left: 250px;
@@ -438,6 +439,7 @@ hr {
   }
   .left-middle {
     width: 275px;
+    margin-left: 25px;
   }
   .left-middle p {
     font-size: 23px;
@@ -451,9 +453,12 @@ hr {
   }
   .left-bottom {
     width: 275px;
+    display: flex;
+    justify-content: center;
+    margin-left: 25px;
   }
   .day p {
-    font-size: 11px;
+    font-size: 17px;
     color: white;
   }
   .logo-heading {
@@ -482,11 +487,12 @@ hr {
     margin-top: 0px;
     width: 275px;
     height: 1775px;
-    margin-left: 20px;
+    margin-left: 45px;
     margin-bottom: 25px;
   }
   .middle-top {
     display: flex;
+    gap: 2vw;
     flex-direction: column;
   }
   .middle-bottom {
@@ -511,12 +517,5 @@ hr {
   .alignment p {
     font-size: 25px;
     padding-right: 10px;
-  }
-}
-@media screen and (min-height: 650px) and (max-height: 850px) {
-  .container {
-    display: flex;
-    flex-direction: column;
-    gap: 160px;
   }
 }
