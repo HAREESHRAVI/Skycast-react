@@ -173,6 +173,7 @@ hr {
 }
 
 .temp p {
+  padding-left: 5px;
   margin-top: 15px;
   color: white;
   font-size: 30px;
@@ -405,7 +406,7 @@ hr {
     font-size: 35px;
   }
   .search-container {
-    margin-left: 250px;
+    margin-left: 290px;
     z-index: 1;
   }
   .search-button {
@@ -432,6 +433,9 @@ hr {
     width: 50px;
     height: auto;
     margin-top: 10px;
+  }
+  .logo-font {
+    display: none;
   }
   .temperature img {
     width: 75px;

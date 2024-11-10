@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import clearsky from '../src/assets/weather_icons/01d.png';
+import logo from '../src/assets/weather_icons/logo.jpg';
+import font from '../src/assets/weather_icons/logofont.jpg';
 import { FaCalendar } from "react-icons/fa";
 import { FaTemperatureArrowUp } from "react-icons/fa6";
 import { FaTemperatureArrowDown } from "react-icons/fa6";
@@ -12,10 +13,12 @@ import { MdOutlineCompress } from "react-icons/md";
 import { MdRemoveRedEye } from "react-icons/md";
 import { PiWind } from "react-icons/pi";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState('');
   const apiKey = '5e69be56ae5faf84ec9c4012d4250049';
+
   const fetchWeatherData = (lat, lon) => {
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
@@ -25,6 +28,7 @@ function App() {
       console.error("Error fetching weather data:", error);
     });
   }
+
   const getWeatherDataForThanjavur = () => {
     const defaultLocation = 'Thanjavur';
     const geocodeUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&appid=${apiKey}`;
@@ -36,16 +40,17 @@ function App() {
       console.error("Error fetching location data:", error);
     });
   }
-  
+
   useEffect(() => {
-    getWeatherDataForThanjavur(); // Call this function on component mount
+    getWeatherDataForThanjavur();
   }, []);
-  
+
   const searchLocation = () => {
+    if (!location) return; 
     const geocodeUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`;
+    
     axios.get(geocodeUrl).then((response) => {
       const { lat, lon } = response.data.coord;
-      console.log(response.data);
       fetchWeatherData(lat, lon);
     }).catch(error => {
       console.error("Error fetching location data:", error);
@@ -53,6 +58,13 @@ function App() {
 
     setLocation('');
   }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      searchLocation();
+    }
+  }
+
   const capitalizeDescription = (description) => {
     if (!description) return '';
     return description
@@ -60,12 +72,14 @@ function App() {
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
   };
+
   return (
     <>
       <div className='search-container'>
         <input
           value={location}
           onChange={event => setLocation(event.target.value)}
+          onKeyDown={handleKeyDown} 
           type="text"
           placeholder='Enter city...'
         />
@@ -75,8 +89,8 @@ function App() {
       <div className='container'>
         <div className="left-container">
           <div className="left-top">
-            <img className='logo' src={clearsky} alt="logo" />
-            <h1 className='logo-heading'>SkyCast</h1>
+            <img className='logo' src={logo} alt="logo" />
+            <img className='logo-font' src={font} alt="font" />
           </div>
           <div className="left-middle">
             {data.city ? <p>{data.city.name}</p> : null}
@@ -158,16 +172,18 @@ function App() {
               <p style={{ color: '#585858' }}>Visibility</p>
               <div className='alignment'>
                 <MdRemoveRedEye color='white' size='100' />
-                {data.list && data.list[0].visibility ? <p>{(data.list[0].visibility / 1000)} Km</p> : <p>Data unavailable</p>}
-                
+                {data.list && data.list[0].visibility ? 
+                  (<p>{(data.list[0].visibility / 1000)} Km</p>) : 
+                  (<p>Data unavailable</p>)}
               </div>
             </div>
             <div className='humidity'>
               <p style={{ color: '#585858' }}>Wind Speed</p>
               <div className='alignment'>
                 <PiWind color='white' size='100' />
-                {data.list && data.list[0].wind ? (
-                  <p>{(data.list[0].wind.speed * 3.6).toFixed(2)} Km/h</p>) : (<p>Data unavailable</p>)}
+                {data.list && data.list[0].wind ? 
+                  (<p>{(data.list[0].wind.speed * 3.6).toFixed(2)} Km/h</p>) : 
+                  (<p>Data unavailable</p>)}
               </div>
             </div>
           </div>
